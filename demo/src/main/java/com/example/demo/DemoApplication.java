@@ -12,11 +12,4 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	// @Bean
-	// public InternalResourceViewResolver viewResolver() {
-	// InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-	// resolver.setPrefix("/WEB-INF/views/");
-	// resolver.setSuffix(".jsp");
-	// return resolver;
-	// }
 }

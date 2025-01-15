@@ -17,17 +17,21 @@
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+
+		<!-- Thư viện hỗ trợ phát triển ứng dụng web với Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- Thư viện hỗ trợ kiểm thử cho ứng dụng Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Công cụ phát triển, cho phép tự động làm mới ứng dụng khi có thay đổi -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -35,38 +39,77 @@
 		</dependency>
 
 		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>			<!-- Hoặc phiên bản mới nhất -->
+		</dependency>
+
+		<!-- Thư viện Tomcat cho ứng dụng Spring Boot, được cung cấp từ môi trường bên ngoài -->
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Thư viện hỗ trợ JSP cho Tomcat, cần thiết cho việc xử lý JSP -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-			<version>11.0.2</version>			<!-- Đảm bảo rằng phiên bản này khớp với phiên bản Tomcat -->
+			<version>11.0.2</version>
 		</dependency>
 
+		<!-- API cho JSTL (JavaServer Pages Standard Tag Library) -->
 		<dependency>
 			<groupId>jakarta.servlet.jsp.jstl</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
 			<version>3.0.2</version>
 		</dependency>
 
+		<!-- Thư viện triển khai JSTL -->
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 		</dependency>
 
+		<!-- API cho Expression Language (EL) trong JSP -->
 		<dependency>
 			<groupId>jakarta.el</groupId>
 			<artifactId>jakarta.el-api</artifactId>
-			<version>6.0.1</version>			<!-- Mới nhất tại thời điểm viết -->
+			<version>6.0.1</version>
 		</dependency>
 
+		<!-- Thư viện triển khai Expression Language (EL) -->
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>jakarta.el</artifactId>
 			<version>4.0.0</version>
+		</dependency>
+
+		<!-- Thư viện cho Apache Tiles, hỗ trợ tạo layout cho ứng dụng web  -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+
+		<!-- Thư viện hỗ trợ tích hợp Tiles với JSP -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+
+		<!-- Thư viện hỗ trợ tích hợp Tiles với Servlet -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-servlet</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+
+		<!-- Thư viện hỗ trợ Spring Data JPA, cho phép tương tác với cơ sở dữ liệu -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
