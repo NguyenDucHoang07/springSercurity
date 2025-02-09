@@ -14,18 +14,20 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             <link rel="stylesheet" href="/css/demo.css">
+
         </head>
 
         <body>
             <h1>USER LIST</h1>
-            <c:if test="${not empty UserList}">
+            <!-- <c:if test="${not empty UserList}">
                 <ul>
                     <c:forEach var="user" items="${UserList}">
                         <li>${user.name} - Age : ${user.age}</li>
                     </c:forEach>
                 </ul>
-                <button>Submit </button>
-            </c:if>
+            </c:if>-->
+            ${aa}
+            <button>ádfdfsd</button>
         </body>
 
         </html>

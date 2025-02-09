@@ -12,27 +12,49 @@
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+                <script>
+                    function togglePasswordVisibility() {
+                        const passwordField = document.getElementById('passWord');
+                        const passwordToggle = document.getElementById('passwordToggle');
+                        passwordField.type = passwordToggle.checked ? 'text' : 'password';
+                    }
+                </script>
             </head>
 
             <body>
                 <div class="container mt-5">
                     <div class="row">
                         <div class="col-md-6 col-12 mx-auto">
-                            <h1>CREATE USER</h1>
+                            <h1>UPDATE USER</h1>
 
-                            <form:form method="post" action="/admin/users/create" modelAttribute="newUser">
+                            <form:form method="post" action="/admin/user/update" modelAttribute="newUser">
+                                <div class="mb-3">
+                                    <label for="id" class="form-label">ID</label>
+                                    <form:input type="text" class="form-control" path="id" aria-describedby="idlHelp" />
+
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email address</label>
                                     <form:input type="email" class="form-control" path="email"
-                                        aria-describedby="emailHelp" />
+                                        aria-describedby="emailHelp" disabled="true" />
+
                                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                                <!-- <div class="mb-3" style="display: none;">
                                     <label for="passWord" class="form-label">Password</label>
-                                    <form:input type="password" class="form-control" path="passWord" />
-                                </div>
+                                    <form:input type="password" class="form-control" path="passWord"
+                                        required="required" />
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="passwordToggle"
+                                            onclick="togglePasswordVisibility()" />
+                                        <label class="form-check-label" for="passwordToggle">Show Password</label>
+                                    </div>
+
+                                </div> -->
+
+
 
                                 <div class="mb-3">
                                     <label for="phoneNumber" class="form-label">PhoneNumber</label>
@@ -51,7 +73,7 @@
 
 
 
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type=" submit" class="btn btn-primary">Submit</button>
                             </form:form>
                             <input class="form-control" id="disabledInput" type="text"
                                 placeholder="Disabled input here..." disabled>
