@@ -26,7 +26,7 @@
                     </c:forEach>
                 </ul>
             </c:if>-->
-            ${aa}
+
             <button>ádfdfsd</button>
         </body>
 

@@ -30,7 +30,7 @@ public class Role {
     }
 
     public void setId(long id) {
-        id = id;
+        this.id = id;
     }
 
     public String getName() {

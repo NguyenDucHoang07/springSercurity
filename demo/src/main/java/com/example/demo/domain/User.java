@@ -11,6 +11,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -18,10 +23,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
+
+    @NotNull
+    @Size(min = 2, message = "Phải có 2 kí tự")
     private String passWord;
+
+    @NotNull
     private String phoneNumber;
+
+    @NotNull
     private String fullName;
+
+    @NotNull
     private String address;
 
     private String avatar;
@@ -34,6 +50,22 @@ public class User {
     // User one to many order
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     // RoleId
     public User() {

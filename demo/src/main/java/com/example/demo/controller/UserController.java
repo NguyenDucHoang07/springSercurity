@@ -1,29 +1,43 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.User;
+import com.example.demo.service.UploadFileService;
 // import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
 
     private final UserService userService;
+    private final UploadFileService uploadFileService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService,
+            UploadFileService uploadFileService,
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.uploadFileService = uploadFileService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -47,20 +61,30 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping(value = "/admin/users/create", method = RequestMethod.POST)
-    public String index(Model model, @ModelAttribute("newUser") User data) {
-        System.out.println(data);
+    @PostMapping(value = "/admin/users/create")
+    public String index(Model model, @ModelAttribute("newUser") @Valid User data, BindingResult newUserBindingResult,
+            @RequestParam("File") MultipartFile file) {
+
+        // if (bindingResult.hasErrors()) {
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        }
+        if (newUserBindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
+
+        String avatar = this.uploadFileService.handleSaveUploadFile(file, "avatar");
+        String hashPassword = this.passwordEncoder.encode(data.getPassWord());
+
+        data.setAvatar(avatar);
+        data.setPassWord(hashPassword);
+        data.setRole(this.userService.getRoleByName(data.getRole().getName()));
         this.userService.handleUser(data);
         return "redirect:/table/user";
     }
 
-    // @RequestMapping("/table/user")
-    // public String tableUser() {
-
-    // return "admin/user/tableUser";
-    // }
-
-    @RequestMapping("/admin/user")
+    @GetMapping("/admin/user")
     public String indexUser(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/create";
